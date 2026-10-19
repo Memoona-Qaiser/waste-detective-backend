@@ -1,0 +1,6 @@
+venv/
+__pycache__/
+*.pyc
+waste.db
+.env
+.auth_secret
