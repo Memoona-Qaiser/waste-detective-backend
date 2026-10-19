@@ -4,11 +4,14 @@ from contextlib import contextmanager
 from datetime import datetime
 
 # Hamesha isi folder mein waste.db khule, chahe server kisi bhi folder se chalayein
-DB_PATH = os.getenv(
-    "DB_PATH",
-    os.path.join(os.path.dirname(os.path.abspath(__file__)), "waste.db"),
-)
-
+if os.getenv("VERCEL"):
+    # Vercel par sirf /tmp mein likha ja sakta hai
+    DB_PATH = "/tmp/waste.db"
+else:
+    DB_PATH = os.getenv(
+        "DB_PATH",
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "waste.db"),
+    )
 
 @contextmanager
 def conn():

@@ -11,15 +11,18 @@ SECRET_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".auth_se
 
 
 def _load_secret():
-    """Token par sign karne ki chaabi. Pehli dafa khud ban jati hai aur GitHub par nahi jati."""
+    """Token par sign karne ki chaabi."""
     env = os.environ.get("AUTH_SECRET")
     if env:
         return env.encode()
-    if not os.path.exists(SECRET_FILE):
-        with open(SECRET_FILE, "wb") as f:
-            f.write(base64.urlsafe_b64encode(os.urandom(32)))
-    with open(SECRET_FILE, "rb") as f:
-        return f.read().strip()
+    try:
+        if not os.path.exists(SECRET_FILE):
+            with open(SECRET_FILE, "wb") as f:
+                f.write(base64.urlsafe_b64encode(os.urandom(32)))
+        with open(SECRET_FILE, "rb") as f:
+            return f.read().strip()
+    except OSError:
+        return b"demo-fallback-secret-change-me"
 
 
 SECRET = _load_secret()
