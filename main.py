@@ -15,7 +15,6 @@ import ingest
 import models
 import water
 
-
 app = FastAPI(title="Resource Waste Detective API")
 
 frontend_url = os.getenv(
@@ -30,6 +29,7 @@ app.add_middleware(
         "https://waste-detective-frontend-thso.vercel.app",
         frontend_url,
     ],
+    allow_origin_regex=r"https://waste-detective-frontend-thso.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
