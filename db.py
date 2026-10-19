@@ -4,7 +4,10 @@ from contextlib import contextmanager
 from datetime import datetime
 
 # Hamesha isi folder mein waste.db khule, chahe server kisi bhi folder se chalayein
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "waste.db")
+DB_PATH = os.getenv(
+    "DB_PATH",
+    os.path.join(os.path.dirname(os.path.abspath(__file__)), "waste.db"),
+)
 
 
 @contextmanager
