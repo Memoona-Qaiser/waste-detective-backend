@@ -23,8 +23,14 @@ frontend_url = os.getenv(
     "https://waste-detective-frontend-thso.vercel.app"
 ).rstrip("/")
 
+
 app.add_middleware(
     CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
     allow_origins=[
         "http://localhost:5173",
         "https://waste-detective-frontend-thso.vercel.app",
