@@ -15,22 +15,28 @@ import models
 import water
 import os
 
+
 app = FastAPI(title="Resource Waste Detective API")
+
 frontend_url = os.getenv(
     "FRONTEND_URL",
-    "http://localhost:5173"
+    "https://waste-detective-frontend-thso.vercel.app"
 ).rstrip("/")
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "https://waste-detective-frontend-thso.vercel.app",
         frontend_url,
     ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 db.init_db()
+
 
 TARIFF = 60                                # Rs per kWh
 NIGHT_HOURS = 8                            # 22:00 se 06:00
